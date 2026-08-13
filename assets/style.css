@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@600;700&display=swap');
+
+:root {
+  --mersad-forest: #0F5C4D;
+  --mersad-deep: #16332D;
+  --mersad-teal: #178A70;
+  --mersad-mint-bg: #F4FAF7;
+  --mersad-card: #FFFFFF;
+  --mersad-line: #E3EEE9;
+  --mersad-muted: #5C766E;
+
+  --risk-low: #3FA66B;
+  --risk-medium: #E8B84B;
+  --risk-high: #E0793A;
+  --risk-critical: #C0392B;
+}
+
+/* ===== أساسيات عامة + RTL ===== */
+html, body, [class*="css"] {
+  font-family: 'IBM Plex Sans Arabic', 'Segoe UI', sans-serif !important;
+}
+
+.stApp {
+  background: var(--mersad-mint-bg);
+  direction: rtl;
+}
+
+section.main > div {
+  direction: rtl;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+  color: var(--mersad-deep);
+  font-weight: 700 !important;
+}
+
+p, span, div, label, li {
+  font-family: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+/* أرقام بخط لاتيني واضح (أفضل للأرقام الكبيرة والنسب) */
+.mersad-num {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ===== الشريط الجانبي ===== */
+section[data-testid="stSidebar"] {
+  background: #FFFFFF;
+  border-left: 1px solid var(--mersad-line);
+}
+
+section[data-testid="stSidebar"] * {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===== رأس الصفحة / الهوية ===== */
+.mersad-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 26px;
+  background: linear-gradient(135deg, #0F5C4D 0%, #178A70 100%);
+  border-radius: 18px;
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mersad-logo-wrap {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mersad-logo-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(255,255,255,0.0), rgba(255,255,255,0.55), rgba(255,255,255,0.0) 35%);
+  animation: mersad-sweep 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mersad-logo-wrap::before { animation: none; }
+}
+
+@keyframes mersad-sweep {
+  to { transform: rotate(360deg); }
+}
+
+.mersad-logo-wrap img {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: white;
+  padding: 5px;
+  z-index: 1;
+}
+
+.mersad-title-block h1 {
+  color: white !important;
+  font-size: 26px !important;
+  margin: 0 !important;
+  line-height: 1.25;
+}
+
+.mersad-title-block p {
+  color: rgba(255,255,255,0.85);
+  margin: 2px 0 0 0;
+  font-size: 14px;
+}
+
+.mersad-status-pill {
+  margin-right: auto;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+/* ===== بطاقات المؤشرات (KPI) ===== */
+.mersad-kpi {
+  background: var(--mersad-card);
+  border: 1px solid var(--mersad-line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  height: 100%;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.mersad-kpi:hover {
+  box-shadow: 0 6px 18px rgba(15, 92, 77, 0.10);
+  transform: translateY(-2px);
+}
+
+.mersad-kpi .kpi-icon { font-size: 20px; }
+
+.mersad-kpi .kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--mersad-forest);
+  margin: 6px 0 2px 0;
+}
+
+.mersad-kpi .kpi-label {
+  font-size: 13px;
+  color: var(--mersad-muted);
+}
+
+/* ===== بطاقات الرؤى (Insights) ===== */
+.mersad-insight {
+  background: var(--mersad-card);
+  border: 1px solid var(--mersad-line);
+  border-right: 4px solid var(--mersad-teal);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  font-size: 14.5px;
+  color: var(--mersad-deep);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+/* ===== بطاقات التوصيات ===== */
+.mersad-rec {
+  background: var(--mersad-card);
+  border: 1px solid var(--mersad-line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+
+.mersad-rec.risk-Critical { border-right: 5px solid var(--risk-critical); }
+.mersad-rec.risk-High { border-right: 5px solid var(--risk-high); }
+.mersad-rec.risk-Medium { border-right: 5px solid var(--risk-medium); }
+.mersad-rec.risk-Low { border-right: 5px solid var(--risk-low); }
+
+.mersad-rec .rec-priority {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.mersad-rec .rec-row {
+  font-size: 13.5px;
+  color: var(--mersad-muted);
+  margin: 4px 0;
+}
+
+.mersad-rec .rec-row b { color: var(--mersad-deep); }
+
+/* ===== شارات الخطورة ===== */
+.risk-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+.risk-badge.risk-Critical { background: var(--risk-critical); }
+.risk-badge.risk-High { background: var(--risk-high); }
+.risk-badge.risk-Medium { background: var(--risk-medium); color: #4A3A00; }
+.risk-badge.risk-Low { background: var(--risk-low); }
+
+/* ===== بطاقة تنقل سريع ===== */
+.mersad-navcard {
+  background: var(--mersad-card);
+  border: 1px solid var(--mersad-line);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  height: 100%;
+}
+
+.mersad-navcard .nav-icon { font-size: 26px; margin-bottom: 6px; }
+.mersad-navcard .nav-title { font-weight: 700; color: var(--mersad-deep); font-size: 15px; }
+.mersad-navcard .nav-desc { font-size: 12.5px; color: var(--mersad-muted); margin-top: 4px; }
+
+/* ===== عناصر عامة ===== */
+.mersad-section-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--mersad-deep);
+  margin: 26px 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mersad-caption {
+  color: var(--mersad-muted);
+  font-size: 13px;
+}
+
+hr.mersad-divider {
+  border: none;
+  border-top: 1px solid var(--mersad-line);
+  margin: 22px 0;
+}
+
+/* إخفاء عناصر Streamlit الافتراضية غير المرغوبة */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
